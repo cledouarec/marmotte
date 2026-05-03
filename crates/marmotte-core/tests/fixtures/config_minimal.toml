@@ -1,0 +1,11 @@
+[server]
+listen = "127.0.0.1:9090"
+storage_root = "/tmp/marmotte-test"
+
+[database]
+path = "/tmp/marmotte-test/marmotte.db"
+
+[gc]
+default_ttl_sstate_days = 30
+default_ttl_downloads_days = 365
+global_quota_bytes = 1073741824

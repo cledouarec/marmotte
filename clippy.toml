@@ -1,0 +1,6 @@
+# Clippy configuration
+msrv = "1.94.0"
+# Allow modules over 1000 lines (e.g. db.rs) before complaining.
+too-many-lines-threshold = 200
+# Be strict about argument count.
+too-many-arguments-threshold = 6

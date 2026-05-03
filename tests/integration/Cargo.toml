@@ -1,0 +1,29 @@
+[package]
+name = "marmotte-integration-tests"
+version = "0.0.0"
+edition = "2024"
+publish = false
+
+[lib]
+path = "src/lib.rs"
+
+[dependencies]
+marmotte-core = { path = "../../crates/marmotte-core" }
+marmotte-server = { path = "../../crates/marmotte-server" }
+
+axum = { workspace = true }
+tokio = { workspace = true }
+reqwest = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+sha2 = { workspace = true }
+hex = { workspace = true }
+base64 = { workspace = true }
+thiserror = { workspace = true }
+tempfile = { workspace = true }
+url = "2"
+futures = { workspace = true }
+sqlx = { workspace = true }
+
+[lints]
+workspace = true

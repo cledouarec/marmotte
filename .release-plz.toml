@@ -1,0 +1,70 @@
+# release-plz configuration
+# https://release-plz.dev/docs/config
+
+[workspace]
+# PR settings
+pr_draft = false
+pr_labels = ["release"]
+
+# Release settings
+git_release_enable = true
+git_release_draft = false
+
+# Publish to crates.io
+publish = true
+
+[changelog]
+commit_parsers = [
+    # Skip merge commits
+    { message = "^Merge pull request", skip = true },
+    { message = "^Merge branch", skip = true },
+
+    # Conventional commits groupings
+    { message = "^feat", group = "Added" },
+    { message = "^fix", group = "Fixed" },
+    { message = "^docs", group = "Documentation" },
+    { message = "^refactor", group = "Changed" },
+    { message = "^test", group = "Testing" },
+    { message = "^build", group = "Build" },
+    { message = "^style", group = "Styling" },
+    { message = "^ci", group = "CI/CD" },
+
+    # Catch-all for anything else
+    { message = "^.*", group = "Other" },
+]
+
+body = """
+
+## [{{ version }}]\
+    {%- if release_link -%}\
+        ({{ release_link }})\
+    {% endif %} \
+    - {{ timestamp | date(format="%Y-%m-%d") }}
+{% for group, commits in commits | group_by(attribute="group") %}
+### {{ group | upper_first }}
+
+    {% for commit in commits %}
+        {%- if commit.scope -%}
+            - *({{commit.scope}})* {% if commit.breaking %}[**breaking**] {% endif %}\
+                {{ commit.message }}{{ self::username(commit=commit) }}\
+                {%- if commit.links %} \
+                    ({% for link in commit.links %}[{{link.text}}]({{link.href}}) {% endfor -%})\
+                {% endif %}
+        {% else -%}
+            - {% if commit.breaking %}[**breaking**] {% endif %}{{ commit.message }}{{ self::username(commit=commit) }}{{ self::pr(commit=commit) }}
+        {% endif -%}
+    {% endfor -%}
+{% endfor %}
+{%- if remote.contributors %}
+### Contributors
+{% for contributor in remote.contributors %}
+    * @{{ contributor.username }}
+{%- endfor %}
+{% endif -%}
+{%- macro username(commit) -%}
+    {% if commit.remote.username %} (by @{{ commit.remote.username }}){% endif -%}
+{% endmacro -%}
+{%- macro pr(commit) -%}
+    {% if commit.remote.pr_number %} - #{{ commit.remote.pr_number }}{% endif -%}
+{% endmacro -%}
+"""
