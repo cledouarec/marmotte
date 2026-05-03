@@ -1,0 +1,37 @@
+[package]
+name = "marmotte-cli"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+rust-version.workspace = true
+description = "Marmotte CLI (`marmotte` binary)."
+
+[[bin]]
+name = "marmotte"
+path = "src/main.rs"
+
+[lints]
+workspace = true
+
+[dependencies]
+marmotte-core = { path = "../marmotte-core", version = "=0.1.0" }
+marmotte-server = { path = "../marmotte-server", version = "=0.1.0" }
+axum = { workspace = true }
+tokio = { workspace = true }
+futures = { workspace = true }
+clap = { workspace = true }
+reqwest = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+sha2 = { workspace = true }
+hex = { workspace = true }
+tracing = { workspace = true }
+tracing-subscriber = { workspace = true }
+thiserror = { workspace = true }
+base64 = { workspace = true }
+bytes = { workspace = true }
+url = "2"
+
+[dev-dependencies]
+tempfile = { workspace = true }

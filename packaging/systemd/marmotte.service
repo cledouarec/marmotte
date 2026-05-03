@@ -1,0 +1,23 @@
+[Unit]
+Description=Marmotte cache server
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=exec
+User=marmotte
+Group=marmotte
+ExecStart=/usr/local/bin/marmotte serve --config /etc/marmotte/config.toml
+Restart=on-failure
+RestartSec=5
+LimitNOFILE=65536
+ProtectSystem=strict
+ProtectHome=true
+PrivateTmp=true
+NoNewPrivileges=true
+ReadWritePaths=/var/lib/marmotte /var/log/marmotte
+StateDirectory=marmotte
+LogsDirectory=marmotte
+
+[Install]
+WantedBy=multi-user.target
