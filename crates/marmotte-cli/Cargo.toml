@@ -15,8 +15,8 @@ path = "src/main.rs"
 workspace = true
 
 [dependencies]
-marmotte-core = { path = "../marmotte-core", version = "=0.1.0" }
-marmotte-server = { path = "../marmotte-server", version = "=0.1.0" }
+marmotte-core = { path = "../marmotte-core", version = "=0.1.1" }
+marmotte-server = { path = "../marmotte-server", version = "=0.1.1" }
 axum = { workspace = true }
 tokio = { workspace = true }
 futures = { workspace = true }

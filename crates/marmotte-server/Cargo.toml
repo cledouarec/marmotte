@@ -11,7 +11,7 @@ description = "HTTP server (axum) for Marmotte."
 workspace = true
 
 [dependencies]
-marmotte-core = { path = "../marmotte-core", version = "=0.1.0" }
+marmotte-core = { path = "../marmotte-core", version = "=0.1.1" }
 tokio = { workspace = true }
 futures = { workspace = true }
 futures-util = { workspace = true }
